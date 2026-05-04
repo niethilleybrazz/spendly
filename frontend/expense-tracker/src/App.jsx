@@ -1,8 +1,21 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
 
 const App = () => {
   return (
-    <div className='text-7xl font-bold text-center'>App</div>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Root />} />
+          <Route path="/login" exact element={<Login/>} />
+        </Routes>
+      </Router>
+    </div>
   )
 }
 
