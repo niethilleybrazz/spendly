@@ -9,7 +9,9 @@
   --color-background02: #19191B;
   --color-borders: #393A40;
   --color-text: #EEEEF0;
-  --color-contrast: #0ce25e;
+  --color-contrast: #0BD559;
+  --color-contrast-100: #0bd5589b;
+  --color-error:#fd8083;
   --breakpoint-3xl: 1920px;
 }
 
@@ -22,3 +24,12 @@
         overflow-x: hidden;
     }
 }
+
+.input-box{
+    @apply w-full flex justify-between items-center gap-3 text-text bg-background02 px-4 py-3 mb-4 mt-3 border border-borders rounded-md outline-none;
+}
+
+.btn-primary{
+    @apply w-full h-12 bg-contrast-100 text-white rounded-md cursor-pointer;
+}
+
