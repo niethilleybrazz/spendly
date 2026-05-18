@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/inputs/Input";
+import { validateEmail } from "../../utils/helper";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,19 @@ const Login = () => {
   const navigate = useNavigate();
 
   // Handle Login
-  const handleLogin = async (e) => {};
+  const handleLogin = async (e) => {
+    e.preventDefault(); 
+
+    if(!validateEmail(email)){
+      setError("Opa! Coloque um email válido.")
+      return
+    }
+    if(!validatePassword(password)){
+      setError("Opa! Insira uma senha válida.")
+      return
+    }
+    setError("")
+  };
 
   return (
     <AuthLayout>
@@ -39,7 +52,7 @@ const Login = () => {
             onChange={({ target }) => setPassword(target.value)}
           />
 
-          {error && <p className="text-error text-sm">{error}</p>}
+          {error && <p className="text-error text-sm mb-1">{error}</p>}
           <button type="submit" className="btn-primary">Entrar</button>
 
           <p className="text-text text-sm mt-4">Ainda não tem uma conta? {""}
