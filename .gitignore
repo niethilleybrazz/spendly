@@ -1,0 +1,7 @@
+node_modules/
+
+backend/.env
+backend/.env.local
+
+frontend/expense-tracker/dist/
+frontend/expense-tracker/build/
