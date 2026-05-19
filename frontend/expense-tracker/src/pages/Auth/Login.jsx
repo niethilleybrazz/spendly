@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-text text-xl font-semibold">
+        <h3 className="text-text text-xl font-medium">
           Bem vindo novamente
         </h3>
         <p className="text-text text-sm mt-1.25 mb-6">
