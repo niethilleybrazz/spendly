@@ -5,7 +5,7 @@ const path = require("path")
 
 const app = express()
 
-// midleware para o CORS
+// middleware para o CORS
 app.use(
     cors({
         origin: process.env.CLIENT_URL || "*",
