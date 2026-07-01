@@ -34,8 +34,8 @@ exports.registerUser = async (req, res, next) => {
             user,
             token: generateToken(user._id)
         });
+
     } catch (err) {
-        console.log("ERRO REAL AQUI:", err);
         if (typeof next === "function") {
             return res.status(500).json({ message: "Erro ao criar Usuário", error: err.message });
         }
@@ -47,10 +47,31 @@ exports.registerUser = async (req, res, next) => {
 
 // Login User
 exports.loginUser = async(req,res) => {
+    const {email, password} = req.body
+    if(!email || !password){
+        return res.status(400).json({message: "Todos os campos devem ser preenchidos"})
+    }
+    try {
+        const user = await User.findOne({email})
+        if(!user || !(await user.comparePassword(password))){
+            return res.status(400).json({message :"Email ou senha inválidos"})
+        }
 
+        res.status(200).json({
+            id: user._id, 
+            user,
+            token: generateToken(user._id)
+        })
+    } catch(err){
+        if (typeof next === "function") {
+            return res.status(500).json({ message: "Erro ao fazer login", error: err.message });
+        }
+
+        return res.status(500).json({ message: "Erro interno no servidor", error: err.message });
+    }
 }
 
-// Get Info
+// Get User Info
 exports.getUserInfo = async(req,res) => {
 
 }
