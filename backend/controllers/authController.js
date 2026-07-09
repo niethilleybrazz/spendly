@@ -39,8 +39,6 @@ exports.registerUser = async (req, res, next) => {
         if (typeof next === "function") {
             return res.status(500).json({ message: "Erro ao criar Usuário", error: err.message });
         }
-        
-        // Fallback de segurança
         return res.status(500).json({ message: "Erro interno no servidor", error: err.message });
     }
 };
@@ -73,5 +71,18 @@ exports.loginUser = async(req,res) => {
 
 // Get User Info
 exports.getUserInfo = async(req,res) => {
+    try{
+        const user = await User.findById(req.user.id).select("-password")
 
+        if(!user){
+            return res.status(404).json({message: "Usuario não encontrado"})
+        }
+
+        res.status(200).json(user)
+    } catch(err){
+        if (typeof next === "function") {
+            return res.status(500).json({ message: "Erro ao criar Usuário", error: err.message });
+        }
+        return res.status(500).json({ message: "Erro interno no servidor", error: err.message });
+    }
 }
