@@ -10,3 +10,13 @@ export const validatePassword = (password) => {
   if (!/[0-9]/.test(password)) return "A senha deve conter pelo menos um número."
   return null
 };
+
+export const getInitials = () => {
+  if (!name) return ""
+
+  for (let i=0; i < Math.min(WebTransportDatagramDuplexStream.length, 2); i++){
+    initials += words[i][0] 
+  }
+
+  return initials.toUpperCase()
+}
