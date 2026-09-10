@@ -23,7 +23,7 @@ const SideMenu = ({ activeMenu }) => {
   }
 
   return (
-    <div className="w-64 h-[calc(100vh-61px)] border-r border-borders p-5 sticky top-15.25 z-30">
+    <div className="w-64 h-[calc(100vh-61px)] border-r border-borders p-5 sticky top-15.25 z-30 bg-background02">
       <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
         {user?.profileImageUrl ? (
           <img src={user.profileImageUrl || ""} alt="Imagem de Perfil" className="w-20 h-20 rounded-full" />
@@ -38,11 +38,11 @@ const SideMenu = ({ activeMenu }) => {
         <button
           key={`menu_${index}`}
           className={`w-full flex items-center gap-4 text-[15px] ${
-          activeMenu === item.label ? "text-text bg-contrast-100" : "text-text-fade hover:text-text"  
+          activeMenu === item.label ? "text-text bg-borders" : "text-text-fade hover:text-text"  
           } py-3 px-6 rounded-lg mb-3`}
           onClick={() => handleClick(item.path)}
         >
-          <item.icon className="text-xl text-text" />
+          <item.icon className="text-xl text-contrast" />
           {item.label}
         </button>
       ))}

@@ -86,7 +86,7 @@ const Login = () => {
           <button type="submit" className="btn-primary">Entrar</button>
 
           <p className="text-text text-sm mt-4">Ainda não tem uma conta? {""}
-            <Link className= "font-medium underline text-contrast" to="/signUp">
+            <Link className= "font-medium underline text-contrast-100" to="/signUp">
               Cadastre-se
             </Link>
           </p>

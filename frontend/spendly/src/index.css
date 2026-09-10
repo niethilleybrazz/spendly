@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-display: 'Poppins', sans-serif;
   --font-secondary: 'Cairo', sans-serif;
-  --color-background01: #101010;
-  --color-background02: #19191B;
-  --color-borders : #393a4054;
-  --color-text: #EEEEF0;
-  --color-text-fade: #90a1b9d5;
-  --color-contrast: #0AC251;
-  --color-contrast-100: #0bd558c1;
+  --font-numbers: 'Fragment Mono', sans-serif;
+  --color-background01: #141414;
+  --color-background02: #161616;
+  --color-borders : rgba(51, 51, 51, 0.301);
+  --color-text: #edededff;
+  --color-text-fade: #d6d6d6ff;
+  --color-contrast: #10B981;
+  --color-contrast-100: #34D399;
   --color-error:#fd8083;
   --breakpoint-3xl: 1920px;
 }
@@ -31,6 +33,6 @@
 }
 
 .btn-primary{
-    @apply w-full h-12 bg-contrast-100 text-white rounded-md cursor-pointer hover:bg-contrast duration-300 font-medium;
+    @apply w-full h-12 bg-contrast text-white rounded-md cursor-pointer hover:bg-contrast-100 duration-300 font-medium;
 }
 
