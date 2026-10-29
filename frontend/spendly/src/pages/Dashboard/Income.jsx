@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import IncomeOverview from "../../components/income/IncomeOverview";
 import axiosInstance from "../../utils/axiosInstances";
@@ -9,13 +9,13 @@ import IncomeList from "../../components/income/IncomeList";
 import DeleteAlert from "../../components/DeleteAlert"
 import toast from "react-hot-toast";
 import useUserAuth from "../../hooks/useUserAuth";
+import { downloadBlob } from "../../utils/helper";
 
 
 const Income = () => {
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -23,11 +23,7 @@ const Income = () => {
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
 
   // Detalhes das receitas
-  const fetchIncomeDetails = async () => {
-    if (loading) return;
-
-    setLoading(true);
-
+  const fetchIncomeDetails = useCallback(async () => {
     try {
       const response = await axiosInstance.get(
         `${API_PATHS.INCOME.GET_ALL_INCOME}`,
@@ -36,29 +32,27 @@ const Income = () => {
       if (response.data) {
         setIncomeData(response.data);
       }
-    } catch (error) {
-      console.log("Algo deu errado. Por favor tente novamente.");
-    } finally {
-      setLoading(false);
+    } catch {
+      toast.error("Não foi possível carregar as receitas. Tente novamente.");
     }
-  };
+  }, []);
 
   // Adicionar receita
   const handleAddIncome = async (income) => {
     const {source, amount, date, icon} = income
 
     if(!source.trim()) {
-      toast.error("Fonte de renda necessária")
+      toast.error("Informe a fonte da receita.")
       return
     }
 
     if(!amount || isNaN(amount) || Number(amount)<= 0){
-      toast.error("O total deve ser um número válido maior que 0")
+      toast.error("Informe um valor válido maior que zero.")
       return
     }
 
     if(!date){
-      toast.error("A data é necessário")
+      toast.error("Informe a data da receita.")
       return
     }
 
@@ -78,6 +72,7 @@ const Income = () => {
         "Erro ao adicionar renda:",
         error.response?.data?.message || error.message
       )
+      toast.error("Não foi possível adicionar a receita. Tente novamente.")
     }
   };
 
@@ -90,20 +85,27 @@ const Income = () => {
       toast.success("Receita excluída com sucesso!")
       fetchIncomeDetails()
     } catch(error){
-      console.error("Erro ao exluir receita", error.response?.data?.message || error.message)
+      console.error("Erro ao excluir receita", error.response?.data?.message || error.message)
+      toast.error("Não foi possível excluir a receita. Tente novamente.")
     }
   };
 
-  // Baixar detalhes das receitas
+  // Baixar relatório de receitas
   const handleDownloadIncomeDetails = async () => {
-    
+    try {
+      const response = await axiosInstance.get(API_PATHS.INCOME.DOWNLOAD_INCOME, {
+        responseType: "blob",
+      })
+      downloadBlob(response.data, "receitas.xlsx")
+    } catch (error) {
+      console.error("Erro ao baixar relatório de receitas:", error.response?.data?.message || error.message)
+      toast.error("Não foi possível baixar o relatório de receitas. Tente novamente.")
+    }
   };
 
   useEffect(() => {
     fetchIncomeDetails();
-
-    return () => {};
-  }, []);
+  }, [fetchIncomeDetails]);
 
   return (
     <DashboardLayout activeMenu="Receitas">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Input from "../inputs/Input"
 import EmojiPickerPopup from '../EmojiPickerPopup'
 
@@ -20,7 +20,7 @@ const AddIncomeForm = ({onAddIncome}) => {
         />
 
         <Input
-            value={income.soure}
+            value={income.source}
             onChange={({target})=> handleChange("source", target.value)}
             label="Fonte de renda"
             placeholder="Freelance, Salário, etc"

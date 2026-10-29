@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import { LuPlus } from 'react-icons/lu'
 import CustomBarChart from '../charts/CustomBarChart'
-import {prepareIncomeBarChartData} from '../../utils/helper'
+import { prepareIncomeBarChartData } from '../../utils/helper'
 
 const IncomeOverview = ({transactions, onAddIncome}) => {
-    const [chartData, setChartData] = useState([])
-
-    useEffect(()=> {
-        const result = prepareIncomeBarChartData(transactions)
-        setChartData(result)
-
-        return () => {}
-    }, [transactions])
+    const chartData = prepareIncomeBarChartData(transactions)
   return (
     <div className='card'>
         <div className="flex items-center justify-between">

@@ -1,4 +1,3 @@
-
 export const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return regex.test(email)
@@ -106,4 +105,27 @@ export const prepareIncomeBarChartData = (data) => {
   })
 
   return [...grouped.values()]
+}
+
+export const prepareExpenseLineChartData = (data = []) => {
+  const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date))
+
+  const chartData = sortedData.map((item) => ({
+    month: formatDayMonth(item?.date),
+    amount: item?.amount,
+    category: item?.category,
+  }))
+
+  return chartData
+}
+
+export const downloadBlob = (blob, filename) => {
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement("a")
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000)
 }

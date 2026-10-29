@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import {prepareExpenseBarChartData} from '../../utils/helper'
+import { prepareExpenseBarChartData } from '../../utils/helper'
 import CustomBarChart from '../charts/CustomBarChart'
 
 const last30DaysExpenses = ({data}) => {
-    const [chartData, setChartData] = useState([])
-    useEffect(()=> {
-        const result = prepareExpenseBarChartData(data)
-        setChartData(result)
-
-        return ()=> {}
-    }, [data])
+    const chartData = prepareExpenseBarChartData(data)
 
   return (
     <div className="card col-span-1">
