@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "moment": "^2.31.0",
+    "react-icons": "^5.7.0"
+  }
+}

@@ -68,6 +68,6 @@ exports.getDashboardData = async(req,res) => {
                 recentTransactions: lastTransactions,
         })
     } catch (error) {
-        res.status(500).json({message: "Erro no servidor", error})
+        res.status(500).json({message: "Erro interno no servidor.", error})
     }
 }

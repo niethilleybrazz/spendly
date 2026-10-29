@@ -46,3 +46,16 @@
 .card-btn {
     @apply flex items-center gap-3 text-[12px] font-medium text-text-fade bg-background02 border border-borders px-4 py-1.5 rounded-lg cursor-pointer hover:bg-contrast-fade hover:text-contrast
 }
+
+.add-btn{
+    @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-contrast whitespace-nowrap bg-background02 border border-borders px-4 py-2 rounded-lg cursor-pointer hover:bg-contrast-fade hover:text-contrast
+}
+
+.add-btn-fill {
+    @apply text-white bg-contrast
+}
+
+input[type="date"] {
+  width: 100%;
+  color-scheme: dark; /* deixa o ícone e o seletor claros no tema escuro */
+}

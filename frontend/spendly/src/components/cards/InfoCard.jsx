@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatBRL } from '../../utils/helper'
 
 const InfoCard = ({icon, label, value, color}) => {
   return <div className='flex gap-6'>
@@ -7,7 +8,7 @@ const InfoCard = ({icon, label, value, color}) => {
         </div>
         <div>
             <h6 className='text-sm text-text-fade mb-1'>{label}</h6>
-            <span className='text-[22px] text-text font-numbers'>${value}</span>
+            <span className='text-[22px] text-text font-numbers'>{formatBRL(value)}</span>
         </div>
   </div>
 }

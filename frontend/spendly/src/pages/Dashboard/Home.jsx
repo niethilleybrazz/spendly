@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../../utils/axiosInstances";
 import { API_PATHS } from "../../utils/apiPaths";
 import InfoCard from "../../components/cards/InfoCard";
-import { addThousandsSeparator } from "../../utils/helper";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import RecentTransactions from "../../components/dashboard/RecentTransactions";
@@ -51,14 +50,14 @@ const Home = () => {
 
 
   return (
-    <DashboardLayout activeMenu="Dashboard">
+    <DashboardLayout activeMenu="Painel">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl border border-borders bg-background02">
             <InfoCard
               icon={<IoMdCard />}
               label="Saldo Total"
-              value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+              value={dashboardData?.totalBalance || 0}
               color="bg-contrast"
             />
           </div>
@@ -66,8 +65,8 @@ const Home = () => {
           <div className="p-6 rounded-2xl border border-borders bg-background02">
             <InfoCard
               icon={<LuWalletMinimal />}
-              label="Renda Total"
-              value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
+              label="Total de receitas"
+              value={dashboardData?.totalIncome || 0}
               color="bg-orange-500"
             />
           </div>
@@ -75,8 +74,8 @@ const Home = () => {
           <div className="p-6 rounded-2xl border border-borders bg-background02">
             <InfoCard
               icon={<LuHandCoins />}
-              label="Despeza Total"
-              value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
+              label="Total de despesas"
+              value={dashboardData?.totalExpense || 0}
               color="bg-red-500"
             />
           </div>

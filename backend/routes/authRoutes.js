@@ -15,7 +15,7 @@ router.get("/getUser", protect, getUserInfo)
 
 router.post("/upload-image", upload.single('image'), (req,res) => {
     if(!req.file) {
-        return res.status(400).json({message: "Não houve upload de arquivo"})
+        return res.status(400).json({message: "Nenhum arquivo foi enviado."})
     }
     const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
     res.status(200).json({imageUrl})

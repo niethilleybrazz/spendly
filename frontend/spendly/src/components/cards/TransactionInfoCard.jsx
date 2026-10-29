@@ -1,5 +1,6 @@
 import React from 'react'
 import {LuUtensils, LuTrendingUp, LuTrendingDown, LuTrash2} from "react-icons/lu"
+import { formatBRL } from '../../utils/helper'
 
 const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, onDelete}) => {
     const getAmountStyles = () => type === "income" ? "bg-contrast-fade text-contrast-100" : "bg-error-fade text-error"
@@ -29,7 +30,7 @@ const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, o
 
                 <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}>
                     <h6 className="text-sm font-medium">
-                        {type === "income" ? "+" : "-"} ${amount}
+                        {type === "income" ? "+" : "-"}{formatBRL(amount)}
                     </h6>
                     {type === "income" ? <LuTrendingUp/> : <LuTrendingDown/>}
                 </div>

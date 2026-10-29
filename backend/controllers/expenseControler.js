@@ -10,7 +10,7 @@ exports.addExpense = async (req, res, next) => {
 
         // Validacao para campos em branco
         if (!amount || !category || !date) {
-            return res.status(400).json({message: "Todos os campos devem ser preenchidos"})
+            return res.status(400).json({message: "Preencha todos os campos obrigatórios."})
         }    
 
         const newExpense = new Expense({
@@ -24,7 +24,7 @@ exports.addExpense = async (req, res, next) => {
         res.status(200).json(newExpense)
 
     } catch(error){
-        res.status(500).json({message: "Erro no servidor"})
+        res.status(500).json({message: "Erro interno no servidor."})
     }
 }
 
@@ -35,7 +35,7 @@ exports.getAllExpense = async (req, res, next) => {
         const expense = await Expense.find({userId}).sort({date: -1})
         res.json(expense)
     } catch(error){
-        res.status(500).json({message: "Erro no servidor"})
+        res.status(500).json({message: "Erro interno no servidor."})
     }
 
 }
@@ -43,9 +43,9 @@ exports.getAllExpense = async (req, res, next) => {
 exports.deleteExpense= async (req, res, next) => {
     try{
         await Expense.findByIdAndDelete(req.params.id)
-        res.json({message: "Gasto deletado com sucesso"})
+        res.json({message: "Despesa excluída com sucesso."})
     } catch(error) {
-        res.status(500).json({message: "Erro no servidor"})
+        res.status(500).json({message: "Erro interno no servidor."})
     }
 }
 
@@ -54,20 +54,20 @@ exports.downloadExpenseExcel = async (req, res, next) => {
     try {
         const expense = await Expense.find({userId}).sort({date: -1})
         
-        const data = income.map(item => ({
-            category: item.category,
-            Amount: item.amount,
-            Date: item.date
+        const data = expense.map(item => ({
+            Categoria: item.category,
+            Valor: item.amount,
+            Data: item.date
         }))
 
         const wb = xlsx.utils.book_new()
         const ws = xlsx.utils.json_to_sheet(data)
         
-        xlsx.utils.book_append_sheet(wb, ws, "Expense") 
+        xlsx.utils.book_append_sheet(wb, ws, "Despesas")
         
-        xlsx.writeFile(wb, 'expense_details.xlsx')
-        res.download('expense_details.xlsx')
+        xlsx.writeFile(wb, 'despesas.xlsx')
+        res.download('despesas.xlsx')
     } catch (error) {
-        res.status(500).json({message: "Erro no servidor"})
+        res.status(500).json({message: "Erro interno no servidor."})
     }
 } 

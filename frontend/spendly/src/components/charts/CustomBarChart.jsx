@@ -1,4 +1,5 @@
 import React from "react";
+import { addThousandsSeparator, formatBRL } from "../../utils/helper";
 import {
   BarChart,
   Bar,
@@ -10,7 +11,7 @@ import {
   Cell,
 } from "recharts";
 
-const getBarColor = (index) => (index % 2 === 0 ? "#34D399" : "#cfbefb");
+const getBarColor = (index) => (index % 2 === 0 ? "#34D399" : "#A886FF");
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -22,7 +23,7 @@ const CustomTooltip = ({ active, payload }) => {
         <p className="text-sm text-gray-600">
           Total:{" "}
           <span className="text-sm font-medium text-gray-900">
-            ${payload[0].payload.amount}
+            {formatBRL(payload[0].payload.amount)}
           </span>
         </p>
       </div>
@@ -31,28 +32,26 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const CustomBarChart = ({ data }) => {
+const CustomBarChart = ({ data = [], xKey = "category" }) => {
   return (
     <div className="bg-background02 mt-6">
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width={"100%"} height={300}>
         <BarChart data={data}>
           <CartesianGrid stroke="none" />
           <XAxis
-            dataKey="category"
+            dataKey={xKey}
             tick={{ fontSize: 12, fill: "#edededff" }}
             stroke="none"
           />
           <YAxis
             width={50}
             tick={{ fontSize: 12, fill: "#edededff" }}
+            tickFormatter={addThousandsSeparator}
             stroke="none"
           />
-          <Tooltip
-            content={<CustomTooltip />}
-            cursor={{ fill: "#161616" }}
-          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: "#161616" }} />
 
-          <Bar dataKey="amount" barSize={40} radius={[10, 10, 0, 0]}>
+          <Bar dataKey="amount" barSize={150} radius={[10, 10, 0, 0]}>
             {data.map((entry, index) => (
               <Cell key={index} fill={getBarColor(index)} />
             ))}

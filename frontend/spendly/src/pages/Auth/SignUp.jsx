@@ -25,11 +25,11 @@ const SignUp = () => {
 
     let profileImageUrl = ""
     if(!fullName) {
-      setError("Por favor, adicione seu nome!")
+      setError("Informe seu nome.")
       return
     }
     if(!validateEmail(email)){
-      setError("Por favor, adicione um email válido!")
+      setError("Informe um e-mail válido.")
       return
     }
 
@@ -66,7 +66,7 @@ const SignUp = () => {
       if(error.response && error.response.data.message) {
         setError(error.response.data.message)
       } else {
-        setError("Algo deu errado. Por favor tente novamente")
+        setError("Não foi possível criar sua conta. Tente novamente.")
       }
     }
   };
@@ -76,7 +76,7 @@ const SignUp = () => {
       <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
         <h3 className="text-xl text-text font-medium">Crie sua conta</h3>
         <p className="text-sx text-text mt-1.25 mb-6">
-          Junte-se a nós adicionando suas informações a baixo
+          Preencha seus dados para começar.
         </p>
 
         <form onSubmit={handleSignUp}>
@@ -86,14 +86,14 @@ const SignUp = () => {
             <Input
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
-              label="Nome Completo"
+              label="Nome completo"
               placeholder={"Seu nome completo"}
               type="text"
             />
 
             <Input
               value={email}
-              label="Email"
+              label="E-mail"
               type="email"
               placeholder="exemplo@exemplo.com"
               onChange={({ target }) => setEmail(target.value)}

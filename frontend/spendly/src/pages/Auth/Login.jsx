@@ -21,7 +21,7 @@ const Login = () => {
   e.preventDefault(); 
 
   if(!validateEmail(email)){
-    setError("Opa! Coloque um email válido.")
+    setError("Informe um e-mail válido.")
     return
   }
 
@@ -51,7 +51,7 @@ const Login = () => {
         if(error.response?.data?.message){
           setError(error.response.data.message)
         } else {
-          setError("Algo deu errado. Por favor tente novamente")
+          setError("Não foi possível entrar. Tente novamente.")
         }
     }
   };
@@ -60,16 +60,16 @@ const Login = () => {
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
         <h3 className="text-text text-xl font-medium">
-          Bem vindo novamente
+          Bem-vindo de volta
         </h3>
         <p className="text-text text-sm mt-1.25 mb-6">
-          Adicione suas credenciais para entrar
+          Informe suas credenciais para acessar sua conta.
         </p>
 
         <form onSubmit={handleLogin}>
           <Input
             value={email}
-            label="Email"
+            label="E-mail"
             type="email"
             placeholder="exemplo@exemplo.com"
             onChange={({ target }) => setEmail(target.value)}
