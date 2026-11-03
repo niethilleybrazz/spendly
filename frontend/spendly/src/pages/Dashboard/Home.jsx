@@ -11,7 +11,7 @@ import { IoMdCard } from "react-icons/io";
 import RecentTransactions from "../../components/dashboard/RecentTransactions";
 import FinanceOverview from "../../components/dashboard/FinanceOverview"
 import ExpenseTransactions from "../../components/dashboard/ExpenseTransactions";
-import Last30DaysExpenses from "../../components/dashboard/last30DaysExpenses";
+import Last30DaysExpenses from "../../components/dashboard/Last30DaysExpenses";
 import RecentIncomeWithChart from "../../components/dashboard/RecentIncomeWithChart";
 import RecentIncome from "../../components/dashboard/RecentIncome";
 
