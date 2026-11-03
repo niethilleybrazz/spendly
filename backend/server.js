@@ -1,20 +1,17 @@
 require("dotenv").config()
-
-require("dotenv").config() 
 const express = require("express")
 const cors = require("cors")
 const path = require("path")
 const connectDB = require("./config/db")
 const authRoutes = require("./routes/authRoutes")
-const incomeRoutes = require ("./routes/incomeRoutes")
-const expenseRoutes = require ("./routes/expenseRoutes")
-const dashboardRoutes = require ("./routes/dashboardRoutes")
+const incomeRoutes = require("./routes/incomeRoutes")
+const expenseRoutes = require("./routes/expenseRoutes")
+const dashboardRoutes = require("./routes/dashboardRoutes")
 
 const app = express()
 
-connectDB();
+connectDB()
 
-// middleware para o CORS
 app.use(
     cors({
         origin: process.env.CLIENT_URL || "*",
@@ -24,15 +21,23 @@ app.use(
 )
 app.use(express.json())
 
-
+// API
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/income", incomeRoutes)
 app.use("/api/v1/expense", expenseRoutes)
 app.use("/api/v1/dashboard", dashboardRoutes)
 
-
-// pasta de uploads
+// uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
+// frontend (build do Vite)
+const distPath = path.join(__dirname, "../frontend/spendly/dist")
+app.use(express.static(distPath))
+
+// por último: qualquer outra rota devolve o index.html (React Router)
+app.get("/{*splat}", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"))
+})
+
 const PORT = process.env.PORT || 5000
-app.listen(PORT, ()=>console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

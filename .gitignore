@@ -1,7 +1,15 @@
 node_modules/
 
-backend/.env
-backend/.env.local
+# variáveis de ambiente (qualquer pasta)
+.env
+.env.*
 
-frontend/expense-tracker/dist/
-frontend/expense-tracker/build/
+# build do frontend
+frontend/spendly/dist/
+frontend/spendly/build/
+
+# uploads locais (opcional, veja a nota abaixo)
+backend/uploads/
+
+# logs
+*.log
