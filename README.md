@@ -41,7 +41,7 @@ Crie o arquivo `backend/.env`:
 MONGO_URI=sua_string_de_conexao
 JWT_SECRET=uma_chave_secreta
 PORT=8000
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:8000
 ```
 
 ### Desenvolvimento
